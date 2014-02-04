@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Drawing SVG circles with data</title>
+		<script type="text/javascript" src="../js/d3.v3.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */		
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			//Width and height
+			var w = 500;
+			var h = 50;
+			
+			//Data
+			var dataset = [ 5, 10, 15, 20, 25 ];
+			
+			//Create SVG element
+			var svg = d3.select("body") //the element is called svg, for clarity sake. selecting the body here - the full body of the page - and then appending an svg which is of width and height w, h
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+
+			var circles = svg.selectAll("circle") //i make a variable called circle - again, for clarity. I want the variable to correspond to all elements called circle for the future, and to bind data to all of those circles. 
+			    .data(dataset)
+			    .enter()
+			    .append("circle")
+			    .attr("class","oneCirc"); //now i have a class for this particular set of circles.
+
+			 d3.selectAll('.oneCirc') //i can select all of the circles of that class
+				.attr("cx", function(d, i) {
+						return (i * 50) + 25;
+					})
+				   .attr("cy", h/2)
+				   .attr("r", function(d) {
+						return d;
+				   });
+
+			// circles.attr("cx", function(d, i) {
+			// 			return (i * 50) + 25;
+			// 		})
+			// 	   .attr("cy", h/2)
+			// 	   .attr("r", function(d) {
+			// 			return d;
+			// 	   });
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Drawing SVG circles with data</title>
+		<script type="text/javascript" src="../js/d3.v3.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */		
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			//Width and height
+			var w = 500;
+			var h = 500;
+			
+			//Data
+			var dataset = 
+[{"Year":1987,"BA":32710,"MA":8061,"PhD":771,"cumuBA":32710,"cumuMA":8061,"cumuPhD":771},
+{"Year":1988,"BA":33004,"MA":7524,"PhD":716,"cumuBA":65714,"cumuMA":15585,"cumuPhD":1487},
+{"Year":1989,"BA":34386,"MA":7606,"PhD":740,"cumuBA":100100,"cumuMA":23191,"cumuPhD":2227},
+{"Year":1990,"BA":35957,"MA":8049,"PhD":827,"cumuBA":136057,"cumuMA":31240,"cumuPhD":3054}];
+			
+			//Create SVG element
+			var svg = d3.select("body") //the element is called svg, for clarity sake. selecting the body here - the full body of the page - and then appending an svg which is of width and height w, h
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+
+			var circles = svg.selectAll("circle")
+			    .data(dataset)
+			    .enter()
+			    .append("circle");
+
+			var circleOne = 
+			circles			    
+				.attr("class","bachelors") //now i have a class for this particular set of circles.
+			 // d3.selectAll('.oneCirc') //i can select all of the circles of that class
+					.attr("cx", function(d, i) {
+						return 100+i*50;
+					})
+				   .attr("cy", h/4)
+				   .attr("r", function(d) {
+						return d.BA/1000;
+				   });
+
+//////////////////////////uncomment these segments one by one
+
+
+
+
+
+
+//////////////////////////#1: adding more circles according to different rules
+////won't work because it selects all the circles that have been created and changes everything, rather than only changing a select few
+
+			// var circleTwo = 
+			// d3.selectAll("circle")
+			// // circles
+			// 	.attr("class", "twoCirc")
+			// 	.attr("cx", function(d,i){
+			// 		return i*20+20;
+			// 	})
+			// 	.attr("cy", h-10)
+			// 	.attr("r", function(d){
+			// 		return d.MA/1000;
+			// 	});
+
+
+//////////////////////////#2: adding more circles and when you add them, bind the data to this new subset
+////works, because we have made a new subset of the data that is specific to our use here			
+
+			// var circleTwo = svg.selectAll("circle").select("circle two")
+			// .data(dataset).enter().append("circle")
+			// .attr("class", "masters")
+			// .attr("cx", function(d,i){
+			// 	return 100+i*50;
+			// })
+			// .attr("cy", h-10)
+			// .attr("r", function(d){
+			// 	return d.MA/1000;
+			// });
+
+
+//////////////////////////#3: adding more circles and when you add them, bind the data to this new subset
+////works, because circles already contains a reference to the svg and selecting circles in general
+
+			// var circleTwo = circles.select("circle two")
+			// .data(dataset).enter().append("circle")
+			// .attr("class", "masters")
+			// .attr("cx", function(d,i){
+			// 	return 100+i*50;
+			// })
+			// .attr("cy", h-10)
+			// .attr("r", function(d){
+			// 	return d.MA/1000;
+			// });
+
+
+//////////////////////////OPTION 1
+		////circle one is a variable so we can continue to reference it like this:
+
+			// circleOne
+			// 	.transition()
+			// 	.duration(3000)
+			// 	.attr("r", 10);
+
+//////////////////////////OPTION 2
+		////or even like this, using a different segment of the data:
+
+			// circleOne
+			// 	.transition()
+			// 	.duration(3000)
+			// 	.attr("r", function(d){
+			// 		return d.MA/1000;
+			// 	});
+
+		</script>
+	</body>
+</html>
