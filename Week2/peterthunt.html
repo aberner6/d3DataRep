@@ -120,7 +120,30 @@ d3.selectAll('.allCircles')
         .style("stroke-width",0) //all the way down
     });
 
-        
+
+    var textScale = d3.scale.linear()
+        .domain([0, d3.max(dataSet, function(d) { return d; })])
+        .range([5, 200]);
+    var text = svg.selectAll("text")
+        .data(dataSet)
+        .enter()
+        .append("text")
+        .attr("class","textForCircs")
+        .attr("x", function(d){ return textScale(d) })
+        .attr("y", height/2)
+        .attr("fill","white")
+        .text(function(d){ return d; })
+
+    var circleText = svg.selectAll("circle .circForText")
+        .data(dataSet)
+        .enter()
+        .append("circle")
+        .attr("class","circsForText")
+        .attr("cx", function(d){ return textScale(d) })
+        .attr("cy", height/2)
+        .attr("fill","yellow")
+        .attr("opacity",.4)
+        .attr("r",10);
 
 
         </script>
