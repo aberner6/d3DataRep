@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Sketch 1</title>
+        <script type="text/javascript" src="../js/d3.v3.js"></script>
+        <style type="text/css">
+            /* Any CSS style rules can go here */
+        </style>
+    </head>
+    <body>
+        <div id = "Text"></div>
+        <div class="rectangles"></div>
+<!--         <svg width="1000" height="1000">
+            <rect class="rectangles" x="135" y="120" width="200" height="200"/>
+            <rect class="rectangles" x="235" y="220" width="300" height="300"/> -->
+<!--         </svg> -->
+        <script type="text/javascript">
+            var w = 1000;
+            var h = 1000;
+            var dataset = [ 
+            {"xPos": 123.5,
+            "yPos": 128.5,
+            // "width":282,
+            // "height":166
+            }];
+            // var dataset = [ 5 10 ];
+            var otherData = 
+            ["test"];
+
+           var svg = d3.select("body")
+                        .append("svg")
+                        .attr("width", w)
+                        .attr("height", h);
+
+            var rects = svg.selectAll("#rectangles")
+                .data([30, 50, 70])
+                .enter()
+                .append("rect")
+                .attr("class","rect")
+                .attr("y", 100)
+                .attr("width",200)
+                .attr("height", 200)
+                .attr("x", 100)
+                .style("fill", "orange");
+
+            var rects = svg.selectAll("#rectangles")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("class","rect")
+                .attr("y", 200)
+                .attr("width",300)
+                .attr("height", 300)
+                .attr("x", 200)
+                .style("fill", "steelblue");
+
+            var rects = svg.selectAll("#rectangles")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("class","rect")
+                .attr("y", 400)
+                .attr("width",100)
+                .attr("height", 100)
+                .attr("x", 400)
+                .style("fill", "orange");
+
+
+            // rects.attr("x", function(d, i) {
+            //             return (d.xPos);
+            //         })
+            //        .attr("y", function(d,i){
+            //             return (d.yPos);
+            //        })
+            //        .attr("width", function(d) {
+            //             return (d.width);
+            //        })
+            //        .attr("height", function(d){
+            //             return (d.height);
+            //        });
+
+            var text = svg.selectAll("#Text")
+                .data(otherData)
+                .enter()
+                .append("text")
+                .attr("class","text");
+
+            text.attr("x", 20)
+                .attr("y", 20)
+                .text(function(d){
+                    return d;
+                });
+            // Your beautiful D3 code will go here
+        </script>
+    </body>
+</html>
