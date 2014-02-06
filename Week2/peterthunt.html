@@ -146,6 +146,30 @@ d3.selectAll('.allCircles')
         .attr("r",10);
 
 
+
+
+var transition = d3.transition()
+    .duration(750)
+    .ease("linear");
+
+transition.each(function() {
+  d3.selectAll(".textForCircs").transition()
+      .style("opacity", 0)
+      .remove();
+});
+
+transition.transition().each(function() {
+  d3.selectAll(".textForCircs").transition()
+      .style("opacity", 1)
+      // .remove();
+});
+
+
+
+
+
+
+
         </script>
     </body>
 </html>
