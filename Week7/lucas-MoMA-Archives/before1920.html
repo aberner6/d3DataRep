@@ -66,6 +66,24 @@
           a:link {text-decoration:none;}
           a:visited {text-decoration:none;}
           a:hover {text-decoration:underline;}
+/* Hoverbox */
+#hoverbox {
+  pointer-events: none;
+}
+#hoverbox.hidden {
+  display: none;
+}
+#hoverbox .title {
+  fill: white;
+  text-transform: uppercase;
+}
+#hoverbox .artworks {
+  fill: white;
+}
+#hoverbox rect.background {
+  fill: black;
+  opacity: 0.5;
+}
 
         </style>
     </head>
@@ -198,6 +216,8 @@ function changeOpacity(artistClicked){ //this is passing the variable to this ot
     .duration(100)
     .attr("opacity", function(d,i){
       if(artistClicked===jsondata[i].artist.text){ //if the artist clicked is the same as any of the other artists in the whole data file
+        var picName = jsondata[i].pic.alt;
+        updateHoverbox(artistClicked, jsondata[i].pic.alt)
        console.log(jsondata[i].artist.text+jsondata[i].pic.alt); //log that and the relevant paintings so we can make sure it truly is matching artworks
         return 1; //change the opacity to 1
        }  
@@ -207,7 +227,42 @@ function changeOpacity(artistClicked){ //this is passing the variable to this ot
     });
 }
 
-            });
+//Setup hover box
+  hoverbox = svg.append("g")
+    .attr("id", "hoverbox")
+    .attr("class", "hidden")
+    .attr("transform", "translate(4,0)");
+//make a background rectangle to put the text on
+  hoverbox.append("rect")
+    .attr("class", "background")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", 400) //change these to whatever variables you want
+    .attr("height", 100); //change these to whatever variables you want
+//prepare with empty slots for text
+  hoverbox.append("text")
+    .attr("class", "title")
+    .attr("x", 5)
+    .attr("y", 20)
+    .text("");
+  hoverbox.append("text")
+    .attr("class", "artworks")
+    .attr("x", 5)
+    .attr("y", 35)
+    .text("");
+//here we add to the hoverbox with the data from our clicking...
+var updateHoverbox = function(artist, pic) {
+    hoverbox.select(".title").text(artist); //coopt the css class title and put in artist
+    hoverbox.select(".artworks").text(pic); //coopt the css class pic and put in artwork
+    console.log(pic)
+    hoverbox.classed("hidden", false); //show the hoverbox
+};
+//you'll want something like - if you click out of the painting, or if you exit mouseover, hidehoverbox...
+var hideHoverbox = function() {
+  hoverbox.classed("hidden", true);
+};
+
+});
           </script>
     </body>
 </html>
