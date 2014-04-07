@@ -10,18 +10,20 @@
     </head>
     <body>
         <div class = 'thursday'>
-            First
+            Second
         </div>
-<!--         <div class = 'section'>
-        </div> -->
         <script type="text/javascript">
-        // Hey guys are you falling asleep yet?
-        // this code is so confusing I don't understand
             // Your beautiful D3 code will go here
-            var hi = "hi I'm random";
+            var classMembers = ["Skylar","Steve","Evan","Yili","Jean","Peter","Lucas","Yi"];
 
-            d3.select('.thursday')
-            .text(hi);
+            var randomChoice = parseInt(Math.random()*10);
+console.log(randomChoice);
+            console.log(classMembers[3])
+            console.log(classMembers.length)
+            console.log(classMembers[randomChoice])
+
+            // d3.select('.thursday')
+            // .text(hi);
         </script>
     </body>
 </html>

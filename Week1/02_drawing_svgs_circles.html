@@ -24,11 +24,20 @@
 						.attr("width", w)
 						.attr("height", h);
 
-			// var circles = svg.selectAll("circle") //i make a variable called circle - again, for clarity. I want the variable to correspond to all elements called circle for the future, and to bind data to all of those circles. 
-			    // .data(dataset) //Counts and parses our data values. There are five values in our data set, so everything past this point is executed five times, once for each value.
-			    // .enter() //To create new, data-bound elements, you must use enter(). 
-			    // .append("circle"); //Takes the placeholder selection created by enter() and inserts a circle element into the DOM. Circle elements, with data bound, but no attributes defined. if i stop here, i will not see anything.
+			var circles = svg.selectAll("circle") //i make a variable called circle - again, for clarity. I want the variable to correspond to all elements called circle for the future, and to bind data to all of those circles. 
+			    .data(dataset)
+			    .enter()
+			    .append("circle")
+			    .attr("class","oneCirc"); //now i have a class for this particular set of circles.
 
+			 d3.selectAll('.oneCirc') //i can select all of the circles of that class
+				.attr("cx", function(d, i) {
+						return (i * 50) + 25;
+					})
+				   .attr("cy", h/2)
+				   .attr("r", function(d) {
+						return d;
+				   });
 
 			// circles.attr("cx", function(d, i) {
 			// 			return (i * 50) + 25;
